@@ -1,10 +1,6 @@
 import { PiBuilding, PiLinkSimpleBold } from "react-icons/pi";
+import { ExhibCardProps } from "../types/types";
 
-interface ExhibCardProps {
-    name: string;
-    museum: string;
-    link: string;
-}
 
 const ExhibCard: React.FC<ExhibCardProps> = ({ name, museum, link }) => (
     <div className="bg-background-100 rounded-lg p-4 hover:shadow-xl w-full flex flex-col gap-1">
