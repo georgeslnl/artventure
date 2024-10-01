@@ -13,9 +13,9 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ name, museum, link }) => (
             <PiLinkSimpleBold className="text-lg text-text-800" />
             <a href={link}><p className="text-text-800 text-lg hover:underline font-semibold">More info</p></a>
         </div>
-        <div className="flex-row gap-2 justify-end items-center hidden group-hover:flex">
-            <button className="bg-primary-600 text-text-900 p-2 rounded-lg text-xs">Delete</button>
-            <button className="bg-primary-600 text-text-900 p-2 rounded-lg text-xs">Edit</button>
+        <div className="flex-row gap-2 justify-center lg:justify-end items-center flex lg:hidden lg:group-hover:flex">
+            <button className="bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1/4 min-w-fit">Delete</button>
+            <button className="bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1/4 min-w-fit">Edit</button>
         </div>
     </div>
 );
