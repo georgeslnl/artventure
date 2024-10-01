@@ -46,7 +46,7 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
 
     const handleDelete = async () => {
         try {
-            const response = await fetch(`/api/events/${_id}`, {
+            const response = await fetch(`/api/events?id=${_id}`, {
                 method: 'DELETE',
             });
 
@@ -83,42 +83,45 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-col">
-                            <label className="font-semibold text-text-900 text-lg">Name</label>
+                            <label htmlFor={`name-${_id}`} className="font-semibold text-text-900 text-lg">Name</label>
                             <input
+                                id={`name-${_id}`}
                                 {...register("name")}
                                 className="text-text-800 p-1 text-lg w-full rounded-md bg-background-50"
                             />
-                            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                            {errors.name && <p className="text-red-700 font-semibold text-sm">{errors.name.message}</p>}
                         </div>
                         <div className="flex flex-col">
-                            <label className="font-semibold text-text-900 text-lg">Museum</label>
+                            <label htmlFor={`museum-${_id}`} className="font-semibold text-text-900 text-lg">Museum</label>
                             <input
+                                id={`museum-${_id}`}
                                 {...register("museum")}
                                 className="text-text-800 p-1 text-lg w-full rounded-md bg-background-50"
                             />
-                            {errors.museum && <p className="text-red-500 text-sm">{errors.museum.message}</p>}
+                            {errors.museum && <p className="text-red-700 font-semibold text-sm">{errors.museum.message}</p>}
                         </div>
                         <div className="flex flex-col">
-                            <label className="font-semibold text-text-900 text-lg">Link</label>
+                            <label htmlFor={`link-${_id}`} className="font-semibold text-text-900 text-lg">Link</label>
                             <input
+                                id={`link-${_id}`}
                                 {...register("link")}
                                 className="text-text-800 p-1 text-lg w-full rounded-md bg-background-50"
                             />
-                            {errors.link && <p className="text-red-500 text-sm">{errors.link.message}</p>}
+                            {errors.link && <p className="text-red-700 font-semibold text-sm">{errors.link.message}</p>}
                         </div>
                     </div>
                     <div className="flex-row gap-2 justify-center lg:justify-end items-center flex mt-2">
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
+                            className="bg-primary-500 text-text-900 p-2 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
                         >
                             {isSubmitting ? 'Saving...' : 'Save'}
                         </button>
                         <button
                             type="button"
                             onClick={handleCancel}
-                            className="bg-secondary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1-4 min-w-fit"
+                            className="bg-secondary-700 text-text-100 p-2 rounded-lg text-lg lg:text-md w-1-4 min-w-fit"
                         >
                             Cancel
                         </button>
@@ -129,13 +132,13 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
                 <div className="flex-row gap-2 justify-center lg:justify-end items-center flex mt-2">
                     <button
                         onClick={handleDelete}
-                        className="bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
+                        className="bg-primary-500 text-text-900 p-2 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
                     >
                         Delete
                     </button>
                     <button
                         onClick={() => setIsEditMode(true)}
-                        className="bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
+                        className="bg-primary-500 text-text-900 p-2 rounded-lg text-lg lg:text-md w-1/4 min-w-fit"
                     >
                         Edit
                     </button>
