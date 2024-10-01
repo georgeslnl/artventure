@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'
 import ExhibCard from '../components/ExhibCard';
 import { ListCardProps } from '../types/types';
-import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosAddCircleOutline, IoIosCloseCircle } from "react-icons/io";
 import { Event } from '../types/types';
 
 // Define the schema for event validation
@@ -76,7 +76,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
                 >
                     {/* Animate between Add and Close icons */}
                     {isAddMode ? (
-                        <IoIosCloseCircleOutline className=" transition-transform duration-800 ease-in-out rotate-0 text-secondary-500" />
+                        <IoIosCloseCircle className=" transition-transform duration-800 ease-in-out rotate-0 text-secondary-500" />
 
                     ) : (
                         <IoIosAddCircleOutline className=" transition-transform duration-800 ease-in-out rotate-0" />
@@ -96,7 +96,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
                                 placeholder="Medieval Art"
                                 className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
                             />
-                            {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+                            {errors.name && <p className="text-background-900 font-semibold text-sm">{errors.name.message}</p>}
                         </div>
                         <div className="flex flex-col justify-start items-start max-w-full">
                             <label className='font-semibold text-text-900 text-lg'>Museum</label>
@@ -106,7 +106,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
                                 placeholder="Louvre Museum"
                                 className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
                             />
-                            {errors.museum && <p className="text-red-500">{errors.museum.message}</p>}
+                            {errors.museum && <p className="text-background-900 font-semibold text-sm">{errors.museum.message}</p>}
                         </div>
                         <div className="flex flex-col justify-start items-start max-w-full">
                             <label className='font-semibold text-text-900 text-lg'>Link</label>
@@ -116,7 +116,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
                                 placeholder="https://www.louvre.fr/en"
                                 className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
                             />
-                            {errors.link && <p className="text-red-500">{errors.link.message}</p>}
+                            {errors.link && <p className="text-background-900 font-semibold text-sm">{errors.link.message}</p>}
                         </div>
                 
                         {/* Register the hidden status input */}
