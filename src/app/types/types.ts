@@ -5,8 +5,8 @@ export interface Event {
     name: string;
     date?: string;
     museum: string;
-    link?: string;
-    status: "Horizon" | "Itinerary" | "Travelogue" | "";
+    link: string;
+    status: "Horizon" | "Itinerary" | "Travelogue";
 }
 
 export interface ListCardProps {
@@ -15,7 +15,7 @@ export interface ListCardProps {
     bgColor: string;
     onEventAdded: (newEvent: Event) => void;
     onEventDelete: (id: string) => void;
-    onEventEdit?: (id: string, updatedEvent: Event) => void;
+    onEventEdit: (updatedEvent: Event) => void;
 }
 
 export interface ExhibCardProps {
@@ -23,6 +23,8 @@ export interface ExhibCardProps {
     name: string;
     museum: string;
     link: string;
+    status: "Horizon" | "Itinerary" | "Travelogue";
     onEventDelete: (id: string) => void;
+    onEventEdit: (updatedEvent: Event) => void;
 }
 

@@ -4,7 +4,7 @@ import AddEventCard from './AddEventCard';
 import { ListCardProps, Event } from '../types/types';
 import { IoIosAddCircleOutline, IoIosCloseCircle } from "react-icons/io";
 
-const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdded, onEventDelete }) => {
+const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdded, onEventDelete, onEventEdit }) => {
     const [isAddMode, setIsAddMode] = useState(false);
     const [localEvents, setLocalEvents] = useState<Event[]>(events);
 
@@ -24,6 +24,11 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
     const handleEventDelete = (id: string) => {
         setLocalEvents(prevEvents => prevEvents.filter(event => event._id !== id));
         onEventDelete(id);
+    }
+
+    const handleEventEdit = (updatedEvent: Event) => {
+        setLocalEvents(prevEvents => prevEvents.map(event => event._id === updatedEvent._id ? updatedEvent : event));
+        onEventEdit(updatedEvent);
     }
 
     return (
@@ -52,7 +57,7 @@ const ListCard: React.FC<ListCardProps> = ({ title, bgColor, events, onEventAdde
                     />
                 )}
                 {localEvents.map((event) => (
-                    <ExhibCard key={event._id} _id={event._id} name={event.name} museum={event.museum} link={event.link} onEventDelete={handleEventDelete}/>
+                    <ExhibCard key={event._id} _id={event._id} name={event.name} museum={event.museum} link={event.link} status={event.status} onEventDelete={handleEventDelete} onEventEdit={handleEventEdit}/>
                 ))}
             </div>
         </div>
