@@ -84,35 +84,35 @@ export default function Home() {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
         <p className="text-2xl font-bold text-text-900 mb-4">Loading...</p>
-        <div className="animate-ping rounded-full h-32 w-32 border-t-2 border-b-2  border-text-900"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2  border-text-900"></div>
       </div>
     );
   }
 
   return (
     <div className="p-6 h-screen">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-5xl font-bold text-text-900 hover:animate-ping">ARTventure.</h1>
+      <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-4">
+        <h1 className="text-5xl font-bold text-text-900">ARTventure.</h1>
         <div>
           {isAuthenticated ? (
-            <>
-              <p className="text-text-900 mr-4">Welcome, {userName}!</p>
+            <div className="flex flex-col gap-0">
+              <p className="text-text-900 text-lg lg:text-2xl font-bold p-2 ">Welcome, {userName}!</p>
               <button
                 onClick={handleSignOut}
-                className="bg-primary-500 text-text-900 p-2 rounded-lg"
+                className="text-lg lg:text-2xl font-bold text-text-900 rounded-lg hover:border-2 hover:border-text-900 p-2"
               >
                 Sign Out
               </button>
-            </>
+            </div>
           ) : (
             <>
               <Link href="/auth/signup">
-                <button className="text-text-900 p-2 rounded-lg mr-2">
+                <button className="lg:text-2xl font-bold text-text-900 p-2 rounded-lg">
                   Sign Up
                 </button>
               </Link>
               <Link href="/auth/login">
-                <button className="bg-secondary-500 text-text-900 p-2 rounded-lg">
+                <button className="lg:text-2xl font-bold text-text-900 p-2 rounded-lg">
                   Login
                 </button>
               </Link>
@@ -127,7 +127,7 @@ export default function Home() {
           <ListCard title="Travelogue" events={travelogueEvents} bgColor="bg-accent-300" onEventAdded={handleEventAdded} onEventDelete={handleEventDelete} onEventEdit={handleEventUpdate} />
         </div>
       ) : (
-        <div className="text-center mt-10">
+        <div className="text-center m-">
           <p className="text-2xl">Please sign up or log in to view and manage your events.</p>
         </div>
       )}
