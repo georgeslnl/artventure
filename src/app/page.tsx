@@ -38,9 +38,9 @@ export default function Home() {
   const travelogueEvents = events.filter((event) => event.status === "Travelogue");
 
   return (
-    <div className="p-4 h-screen">
+    <div className="p-6 h-screen">
       <h1 className="text-5xl font-bold text-text-900">ARTventure</h1>
-      <div className="flex flex-row justify-around my-4 h-4/5">
+      <div className="flex flex-col gap-6 lg:flex-row justify-around mt-4 lg:h-5/6">
         <ListCard title="Horizons" events={horizonEvents} bgColor="bg-primary-300" />
         <ListCard title="Itinerary" events={itineraryEvents} bgColor="bg-secondary-200" />
         <ListCard title="Travelogue" events={travelogueEvents} bgColor="bg-accent-300" />
