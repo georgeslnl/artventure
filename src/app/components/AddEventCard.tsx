@@ -51,31 +51,34 @@ const AddEventCard: React.FC<AddEventCardProps> = ({ status, onEventAdded, onClo
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="bg-secondary-500 rounded-lg p-4 hover:shadow-xl w-full flex flex-col gap-1 group">
         <div className="flex flex-col justify-start items-start max-w-full">
-          <label className='font-semibold text-text-900 text-lg'>Name</label>
+          <label htmlFor="add-event-name" className='font-semibold text-text-900 text-lg'>Name</label>
           <input
+            id="add-event-name"
             {...register("name")}
             placeholder="Medieval Art"
-            className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
+            className="text-text-800 p-1 text-lg w-full placeholder:text-base rounded-md bg-background-50"
           />
           {errors.name && <p className="text-background-900 font-semibold text-sm">{errors.name.message}</p>}
         </div>
         <div className="flex flex-col justify-start items-start max-w-full">
-          <label className='font-semibold text-text-900 text-lg'>Museum</label>
+          <label htmlFor="add-event-museum" className='font-semibold text-text-900 text-lg'>Museum</label>
           <input
+            id="add-event-museum"
             type="text"
             {...register("museum")}
             placeholder="Louvre Museum"
-            className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
+            className="text-text-800 p-1 text-lg w-full placeholder:text-base rounded-md bg-background-50"
           />
           {errors.museum && <p className="text-background-900 font-semibold text-sm">{errors.museum.message}</p>}
         </div>
         <div className="flex flex-col justify-start items-start max-w-full">
-          <label className='font-semibold text-text-900 text-lg'>Link</label>
+          <label htmlFor="add-event-link" className='font-semibold text-text-900 text-lg'>Link</label>
           <input
+            id="add-event-link"
             type="text"
             {...register("link")}
             placeholder="https://www.louvre.fr/en"
-            className="text-text-800 p-1 text-lg w-full placeholder:text-lg rounded-md bg-background-50"
+            className="text-text-800 p-1 text-lg w-full placeholder:text-base rounded-md bg-background-50"
           />
           {errors.link && <p className="text-background-900 font-semibold text-sm">{errors.link.message}</p>}
         </div>
