@@ -38,6 +38,10 @@ export default function Home() {
     setEvents(prevEvents => [...prevEvents, newEvent]);
   }, []);
 
+  const handleEventDelete = useCallback((id: string) => {
+    setEvents(prevEvents => prevEvents.filter(event => event._id !== id));
+  }, []);
+
   const horizonEvents = events.filter((event) => event.status === "Horizon");
   const itineraryEvents = events.filter((event) => event.status === "Itinerary");
   const travelogueEvents = events.filter((event) => event.status === "Travelogue");
@@ -48,9 +52,9 @@ export default function Home() {
     <div className="p-6 h-screen">
       <h1 className="text-5xl font-bold text-text-900 text-center lg:text-start">ARTventure.</h1>
       <div className="flex flex-col gap-6 lg:flex-row justify-around mt-4 lg:h-5/6">
-        <ListCard title="Horizon" events={horizonEvents} bgColor="bg-primary-300" onEventAdded={handleEventAdded} />
-        <ListCard title="Itinerary" events={itineraryEvents} bgColor="bg-secondary-200" onEventAdded={handleEventAdded} />
-        <ListCard title="Travelogue" events={travelogueEvents} bgColor="bg-accent-300" onEventAdded={handleEventAdded} />
+        <ListCard title="Horizon" events={horizonEvents} bgColor="bg-primary-300" onEventAdded={handleEventAdded} onEventDelete={handleEventDelete}/>
+        <ListCard title="Itinerary" events={itineraryEvents} bgColor="bg-secondary-200" onEventAdded={handleEventAdded} onEventDelete={handleEventDelete} />
+        <ListCard title="Travelogue" events={travelogueEvents} bgColor="bg-accent-300" onEventAdded={handleEventAdded} onEventDelete={handleEventDelete} />
       </div>
     </div>
   );

@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "@phosphor-icons/react": "^2.1.7",
     "mongodb": "^6.9.0",
     "net": "^1.0.2",
     "next": "14.2.13",

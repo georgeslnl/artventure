@@ -1,6 +1,7 @@
 
 
 export interface Event {
+    _id: string;
     name: string;
     date?: string;
     museum: string;
@@ -13,11 +14,15 @@ export interface ListCardProps {
     events: Event[];
     bgColor: string;
     onEventAdded: (newEvent: Event) => void;
+    onEventDelete: (id: string) => void;
+    onEventEdit?: (id: string, updatedEvent: Event) => void;
 }
 
 export interface ExhibCardProps {
+    _id: string;
     name: string;
     museum: string;
-    link?: string;
+    link: string;
+    onEventDelete: (id: string) => void;
 }
 
