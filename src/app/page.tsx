@@ -99,7 +99,7 @@ export default function Home() {
               <p className="text-text-900 text-lg lg:text-2xl font-bold p-2 ">Welcome, {userName}!</p>
               <button
                 onClick={handleSignOut}
-                className="text-lg lg:text-2xl font-bold text-text-900 rounded-lg hover:border-2 hover:border-text-900 p-2"
+                className="text-lg lg:text-2xl font-bold text-text-900 rounded-lg p-2"
               >
                 Sign Out
               </button>

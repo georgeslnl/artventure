@@ -89,7 +89,7 @@ const AddEventCard: React.FC<AddEventCardProps> = ({ status, onEventAdded, onClo
           <button 
             type="submit"
             disabled={isSubmitting}
-            className={`bg-primary-500 text-text-900 p-1 rounded-lg text-lg lg:text-md min-w-fit w-1/4 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`bg-primary-500 mt-4 text-text-900 p-1 rounded-lg text-lg lg:text-md min-w-fit w-1/4 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {isSubmitting ? 'Adding...' : 'Add'}
           </button>
