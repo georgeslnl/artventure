@@ -5,6 +5,17 @@ import { z } from 'zod';
 import { signUpSchema } from '@/app/schemas/auth';
 import Link from 'next/link';
 
+interface ErrorResponse {
+  field: string;
+  message: string;
+}
+
+interface SignUpResponse {
+  token: string;
+  errors?: ErrorResponse[];
+  message?: string;
+}
+
 export default function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,14 +47,14 @@ export default function SignUp() {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await res.json();
+      const data: SignUpResponse = await res.json();
 
       if (res.ok) {
         localStorage.setItem('token', data.token);
         router.push('/');
       } else {
         if (data.errors) {
-          setErrors(data.errors.reduce((acc: any, error: any) => {
+          setErrors(data.errors.reduce((acc: { [key: string]: string }, error: ErrorResponse) => {
             acc[error.field] = error.message;
             return acc;
           }, {}));
@@ -53,8 +64,8 @@ export default function SignUp() {
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldErrors = error.errors.reduce((acc: any, err: any) => {
-          acc[err.path[0]] = err.message;
+        const fieldErrors = error.errors.reduce((acc: { [key: string]: string }, err: z.ZodIssue) => {
+          acc[err.path[0] as string] = err.message;
           return acc;
         }, {});
         setErrors(fieldErrors);
@@ -64,6 +75,7 @@ export default function SignUp() {
       }
     }
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-background-50">
