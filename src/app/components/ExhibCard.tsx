@@ -24,9 +24,13 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
 
     const onSubmit = async (data: EventFormData) => {
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`/api/events?id=${_id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(data),
             });
 
@@ -36,8 +40,8 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
             }
 
             const updatedEvent = await response.json();
-            console.log('Updated event:', updatedEvent); // Debugging log
-            onEventEdit({ ...updatedEvent.event, _id }); // Pass the entire updated event object
+            console.log('Updated event:', updatedEvent);
+            onEventEdit({ ...updatedEvent.event, _id });
             setIsEditMode(false);
         } catch (error) {
             console.error('Error updating event:', error);
@@ -46,8 +50,12 @@ const ExhibCard: React.FC<ExhibCardProps> = ({ _id, name, museum, link, status, 
 
     const handleDelete = async () => {
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`/api/events?id=${_id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
             if (!response.ok) {

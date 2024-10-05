@@ -25,6 +25,7 @@ export default function SignUp() {
 
       if (res.ok) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', data.name); // Save the name to local storage
         router.push('/');
       } else {
         setError(data.message || 'An error occurred during sign up');
@@ -34,6 +35,7 @@ export default function SignUp() {
       setError('An unexpected error occurred');
     }
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-background-50">

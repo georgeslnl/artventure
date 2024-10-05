@@ -27,9 +27,13 @@ const AddEventCard: React.FC<AddEventCardProps> = ({ status, onEventAdded, onClo
 
   const onSubmit = async (data: EventFormData) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('/api/events', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(data),
       });
 

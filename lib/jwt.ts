@@ -2,16 +2,15 @@ import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
 
-export function signToken(payload: object): string {
+export function signToken(payload: { userId: string }): string {
   return jwt.sign(payload, SECRET_KEY, { expiresIn: '1d' });
 }
 
-export function verifyToken(token: string): jwt.JwtPayload | null {
+export function verifyToken(token: string): { userId: string } | null {
   try {
-    return jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
+    return jwt.verify(token, SECRET_KEY) as { userId: string };
   } catch (error) {
-    // You can log the error here if needed
-    console.error('Token verification failed:', error);
+    console.error('Failed to verify token:', error);
     return null;
   }
 }

@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     const token = signToken({ userId: result.insertedId.toString() });
 
-    return NextResponse.json({ token }, { status: 201 });
+    return NextResponse.json({ token, name }, { status: 201 });
   } catch (error) {
     console.error('Sign up error:', error);
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
