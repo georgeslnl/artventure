@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ListCard from "./components/ListCard";
 import { Event } from "./types/types";
@@ -10,7 +9,6 @@ export default function Home() {
   const [userName, setUserName] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -59,7 +57,6 @@ export default function Home() {
   const handleSignOut = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
-    // router.push('/auth/login');
   };
 
   const handleEventAdded = useCallback((newEvent: Event) => {
@@ -90,7 +87,7 @@ export default function Home() {
   }
 
   return (
-    <div className="p-6 h-screen">
+    <div className="p-6 h-screen bg-background-50">
       <div className="flex flex-col lg:flex-row lg:justify-between items-center mb-4">
         <h1 className="text-5xl font-bold text-text-900">ARTventure.</h1>
         <div>
@@ -127,8 +124,8 @@ export default function Home() {
           <ListCard title="Travelogue" events={travelogueEvents} bgColor="bg-accent-300" onEventAdded={handleEventAdded} onEventDelete={handleEventDelete} onEventEdit={handleEventUpdate} />
         </div>
       ) : (
-        <div className="text-center m-">
-          <p className="text-2xl">Please sign up or log in to view and manage your events.</p>
+        <div className="grid place-items-center h-full">
+          <p className="text-4xl text-text-900">Please sign up or log in to view and manage your events.</p>
         </div>
       )}
     </div>
