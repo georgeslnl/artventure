@@ -1,20 +1,35 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { signUpSchema } from '@/app/schemas/auth';
 import Link from 'next/link';
 
 export default function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const router = useRouter();
+
+  const validatePassword = (value: string) => {
+    try {
+      signUpSchema.shape.password.parse(value);
+      setErrors(prev => ({ ...prev, password: '' }));
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setErrors(prev => ({ ...prev, password: error.errors[0].message }));
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setErrors({});
 
     try {
+      signUpSchema.parse({ name, email, password });
+
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,22 +40,35 @@ export default function SignUp() {
 
       if (res.ok) {
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userName', data.name); // Save the name to local storage
         router.push('/');
       } else {
-        setError(data.message || 'An error occurred during sign up');
+        if (data.errors) {
+          setErrors(data.errors.reduce((acc: any, error: any) => {
+            acc[error.field] = error.message;
+            return acc;
+          }, {}));
+        } else {
+          setErrors({ general: data.message || 'An error occurred during sign up' });
+        }
       }
     } catch (error) {
-      console.error('Sign up failed:', error);
-      setError('An unexpected error occurred');
+      if (error instanceof z.ZodError) {
+        const fieldErrors = error.errors.reduce((acc: any, err: any) => {
+          acc[err.path[0]] = err.message;
+          return acc;
+        }, {});
+        setErrors(fieldErrors);
+      } else {
+        console.error('Sign up failed:', error);
+        setErrors({ general: 'An unexpected error occurred' });
+      }
     }
   };
-
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-background-50">
       <form onSubmit={handleSubmit} className="w-10/12 lg:w-full max-w-md bg-secondary-100 p-8 rounded-lg shadow-md">
-      <div className="flex items-center mb-6">
+        <div className="flex items-center mb-6">
           <button
             type="button"
             aria-label='Back'
@@ -51,9 +79,9 @@ export default function SignUp() {
           </button>
           <h2 className="text-2xl font-bold text-text-900 mx-auto text-center">Sign Up</h2>
         </div>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {errors.general && <p className="text-red-500 text-center mb-4">{errors.general}</p>}
         <div className="flex flex-col gap-2">
-        <label htmlFor="signup-name" className='font-semibold text-text-900 text-lg'>Name</label>
+          <label htmlFor="signup-name" className='font-semibold text-text-900 text-lg'>Name</label>
           <input 
             type="text" 
             id="signup-name"
@@ -63,6 +91,8 @@ export default function SignUp() {
             required 
             className="w-full p-2 text-text-800 bg-background-50 rounded-md"
           />
+          {errors.name && <p className="text-red-500">{errors.name}</p>}
+          
           <label htmlFor="signup-email" className='font-semibold text-text-900 text-lg'>Email</label>
           <input 
             type="email" 
@@ -73,16 +103,22 @@ export default function SignUp() {
             required 
             className="w-full p-2 text-text-800 bg-background-50 rounded-md"
           />
+          {errors.email && <p className="text-red-500">{errors.email}</p>}
+          
           <label htmlFor="signup-password" className='font-semibold text-text-900 text-lg'>Password</label>
           <input 
             type="password"
             id="signup-password" 
             value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validatePassword(e.target.value);
+            }} 
             placeholder="Enter your password" 
             required  
             className="w-full p-2 text-text-800 bg-background-50 rounded-md"
           />
+          {errors.password && <p className="text-red-500">{errors.password}</p>}
         </div>
         <button 
           type="submit" 
