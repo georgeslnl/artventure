@@ -2,6 +2,8 @@
 
 ARTventure is a personal project designed to practice and showcase REST API development and authorization skills. It's a web application for art enthusiasts to organize and manage their exhibition visits, functioning as a specialized To-Do list for art exhibitions.
 
+![ARTventure](https://github.com/user-attachments/assets/733844c4-305a-4f53-a66d-bea07e3bfe9e)
+
 ## Project Purpose
 
 This project was created with the following goals:
