@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ARTventure
 
-## Getting Started
+ARTventure is a personal project designed to practice and showcase REST API development and authorization skills. It's a web application for art enthusiasts to organize and manage their exhibition visits, functioning as a specialized To-Do list for art exhibitions.
 
-First, run the development server:
+## Project Purpose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project was created with the following goals:
+- To gain hands-on experience in building a full-stack web application
+- To practice implementing RESTful API endpoints
+- To develop secure user authentication and authorization systems
+- To explore and apply best practices in modern web development
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+As a personal learning project, ARTventure is open to feedback and contributions from the developer community.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **User Authentication**: Secure sign-up and login functionality, demonstrating authentication practices.
+- **Event Management**: CRUD operations for art exhibition events, showcasing RESTful API design.
+- **Event Categorization**: Organize events into three categories:
+  - **Horizon**: Exhibitions you're interested in but haven't planned to visit yet.
+  - **Itinerary**: Exhibitions you've scheduled to attend.
+  - **Travelogue**: Exhibitions you've already visited.
+- **Responsive Design**: Works seamlessly on both desktop and mobile devices.
 
-## Learn More
+## Technology Stack
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend**: React with Next.js
+- **Backend**: Next.js API routes
+- **Database**: MongoDB
+- **Styling**: Tailwind CSS
+- **Authentication**: JWT (JSON Web Tokens)
